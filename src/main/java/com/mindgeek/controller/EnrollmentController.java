@@ -41,7 +41,7 @@ public class EnrollmentController {
 	 *             the exception
 	 */
 	@RequestMapping(value = "/{tokenId}/{date}/free", method = RequestMethod.GET)
-	public Set<String> getFreeSlots(@PathVariable String tokenId, @PathVariable String date) throws Exception {
+	public Set<String> getFreeSlots(@PathVariable String tokenId, @PathVariable String date){
 		enrollmentVallidator.validateToken(tokenId);
 		enrollmentVallidator.validateDate(date);
 		return enrollmentService.getFreeSlotsOnDate(date);
@@ -64,7 +64,7 @@ public class EnrollmentController {
 	 */
 	@RequestMapping(value = "/{tokenId}/{date}/{time}/{name}", method = RequestMethod.POST)
 	public @ResponseBody ResultBean setAppointment(@PathVariable String tokenId, @PathVariable String date,
-			@PathVariable final String time, @PathVariable final String name) throws Exception {
+			@PathVariable final String time, @PathVariable final String name) {
 		enrollmentVallidator.validateToken(tokenId);
 		enrollmentVallidator.validateDate(date);
 		return enrollmentService.bookAppointment(date, time, name);
@@ -82,8 +82,7 @@ public class EnrollmentController {
 	 *             the exception
 	 */
 	@RequestMapping(value = "/{tokenId}/{appointmentId}", method = RequestMethod.DELETE)
-	public @ResponseBody ResultBean removeAppointment(@PathVariable String tokenId, @PathVariable int appointmentId)
-			throws Exception {
+	public @ResponseBody ResultBean removeAppointment(@PathVariable String tokenId, @PathVariable int appointmentId) {
 		enrollmentVallidator.validateToken(tokenId);
 		return this.enrollmentService.removeAppointment(appointmentId);
 
